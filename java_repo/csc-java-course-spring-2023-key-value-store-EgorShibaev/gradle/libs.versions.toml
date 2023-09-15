@@ -1,0 +1,8 @@
+[versions]
+junit = "5.9.2"
+assertj = "3.24.2"
+
+[libraries]
+junit-jupyter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupyter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
