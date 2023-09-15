@@ -15128,7 +15128,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This notebook supports only java repository.</p>
+<p>This notebook supports only Java repository.</p>
 <p>For parsing Java code library <code>javalang</code> is used.</p>
 
 </div>
@@ -15320,6 +15320,21 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>I will try 3 different models for this task: two models which are trained on the Java code and one model which is trained on the text datasets. The first two models are <code>microsoft/CodeGPT-small-java-adaptedGPT2</code> and <code>neulab/codebert-java</code> from Huggingface and the third model is <code>all-MiniLM-L6-v2</code> from Sentence Transformer library.</p>
+<p>For each model, I find embeddings for each method in pairs and consider the cosine distance between embeddings as a similarity measure.</p>
+<p>I expect that models trained on Java code will extract meaningful features from the code and methods with similar semantics will be closer to each other.</p>
+<p>The model from Sentence Transformer is trained for the task of semantic textual similarity, so, it is probable that it will be suitable for code similarity tasks.</p>
+
+</div>
+</div>
+</div>
 </div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15390,7 +15405,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-Some weights of RobertaModel were not initialized from the model checkpoint at neulab/codebert-java and are newly initialized: [&#39;roberta.pooler.dense.bias&#39;, &#39;roberta.pooler.dense.weight&#39;]
+Some weights of RobertaModel were not initialized from the model checkpoint at neulab/codebert-java and are newly initialized: [&#39;roberta.pooler.dense.weight&#39;, &#39;roberta.pooler.dense.bias&#39;]
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 </pre>
 </div>
@@ -15653,6 +15668,19 @@ Similarity by MiniLM: 0.036
 
 </div>
 
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>I consider methods below similar, so, I expect that the similarity score for them will be high.</p>
+<p>CodeGPT and CodeBERT output high score, but Sentence Transformer model output much lower score, so, it is not able to see similarity between these methods.</p>
+
+</div>
+</div>
+</div>
 </div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15765,6 +15793,7 @@ Similarity by MiniLM: 0.768
 <h3 id="Resume">Resume<a class="anchor-link" href="#Resume">&#182;</a></h3><p>I compared 3 models on pairs of java methods.</p>
 <ul>
 <li>all-MiniLM-L6-v2 from Sentence Transformers library is not the best choice for this task because it was trained on large amounts of text data to generate sentence embeddings that capture the semantic meaning of the <strong>text</strong>, so, it is not suitable for code similarity task.</li>
+<li>CodeBERT always output high score, so, it should be taken into account.</li>
 <li>CodeGPT seems to perform better than CodeBERT for this task. So, I will use CodeGPT for the second task.</li>
 </ul>
 
